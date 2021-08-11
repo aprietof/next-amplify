@@ -50,7 +50,7 @@ const PostListing = ({post = {}}) => {
 
   return (
     <Link href={`/${post?.node?.slug}`}>
-      <a  className={styles.card}>
+      <a className={styles.card}>
         <h2>{post?.node?.title}</h2>
       </a>
     </Link>
