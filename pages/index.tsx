@@ -1,11 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import { getAllPostsForHome } from '../lib/api'
-import Link from 'next/link'
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from '../styles/Home.module.css';
+import { getAllPostsForHome } from '../lib/api';
 
 export default function Home({ allPosts }) {
-  const posts = allPosts.edges
+  const posts = allPosts.edges;
 
   return (
     <div className={styles.container}>
@@ -20,7 +20,6 @@ export default function Home({ allPosts }) {
           <a href="https://futurism.com">Futurism</a>
         </h1>
 
-
         <div className={styles.grid}>
           {posts.map((post) => <PostListing key={post?.node?.slug} post={post} />)}
         </div>
@@ -32,7 +31,8 @@ export default function Home({ allPosts }) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Not Powered by{' '}
+          Not Powered by
+          {' '}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
@@ -43,26 +43,23 @@ export default function Home({ allPosts }) {
         </a>
       </footer>
     </div>
-  )
+  );
 }
 
-const PostListing = ({post}) => {
-
-  return (
-    <Link href={`/${post?.node?.slug}`}>
-      <a className={styles.card}>
-        <h2>{post?.node?.title}</h2>
-      </a>
-    </Link>
-  )
-}
+const PostListing = ({ post }) => (
+  <Link href={`/${post?.node?.slug}`}>
+    <a className={styles.card}>
+      <h2>{post?.node?.title}</h2>
+    </a>
+  </Link>
+);
 
 export async function getServerSideProps() {
-  const allPosts = await getAllPostsForHome()
-  
+  const allPosts = await getAllPostsForHome();
+
   return {
-    props: { 
-      allPosts
+    props: {
+      allPosts,
     },
-  }
+  };
 }
