@@ -21,7 +21,9 @@ export default function Home({ allPosts }) {
         </h1>
 
         <div className={styles.grid}>
-          {posts.map((post) => <PostListing key={post?.node?.slug} post={post} />)}
+          {posts.map((post) => (
+            <PostListing key={post?.node?.slug} post={post} />
+          ))}
         </div>
       </main>
 
@@ -31,15 +33,12 @@ export default function Home({ allPosts }) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Not Powered by
-          {' '}
+          Not Powered by{' '}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
           &nbsp;
-          <span>
-            🤣
-          </span>
+          <span>🤣</span>
         </a>
       </footer>
     </div>
