@@ -57,12 +57,12 @@ const PostListing = ({post = {}}) => {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const allPosts = await getAllPostsForHome()
+  
   return {
     props: { 
       allPosts
     },
-    revalidate: 60,
   }
 }
