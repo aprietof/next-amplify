@@ -9,7 +9,7 @@ import styles from '../styles/Home.module.css'
 export default function Post({ post }) {
 
   return (
-    <div>
+    <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
       <article>
         <Head>
           <title>
