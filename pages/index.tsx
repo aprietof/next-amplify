@@ -46,7 +46,7 @@ export default function Home({ allPosts }) {
   )
 }
 
-const PostListing = ({post = {}}) => {
+const PostListing = ({post}) => {
 
   return (
     <Link href={`/${post?.node?.slug}`}>
