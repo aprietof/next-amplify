@@ -1,7 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { getPostBySlug } from '../lib/api';
 import Head from 'next/head'
 import PostBody from '../src/components/post-body'
+import Link from 'next/link'
+import styles from '../styles/Home.module.css'
 
 export default function Post({ post }) {
 
@@ -20,6 +23,20 @@ export default function Post({ post }) {
         <h1>{post?.title}</h1>
         <PostBody content={post?.content} />
       </article>
+      <footer className={styles.footer}>
+        <Link href="/">
+          <a>
+            Not Powered by{' '}
+            <span className={styles.logo}>
+              <img src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            </span>
+            &nbsp;
+            <span>
+              🤣
+            </span>
+          </a>
+        </Link>
+      </footer>
     </div>
   )
 }
