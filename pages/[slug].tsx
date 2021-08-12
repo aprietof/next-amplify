@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
@@ -9,7 +9,7 @@ import styles from '../styles/Home.module.css';
 
 export default function Post({
   post,
-}: InferGetServerSidePropsType<typeof getServerSideProps>): ReactElement {
+}: InferGetStaticPropsType<typeof getStaticProps>): ReactElement {
   return (
     <div
       style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
@@ -41,10 +41,15 @@ export default function Post({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  return { paths: [], fallback: 'blocking' };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { post } = await getPostBySlug(params.slug);
 
   return {
     props: { post },
+    revalidate: 60,
   };
 };

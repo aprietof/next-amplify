@@ -1,4 +1,4 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,7 +8,7 @@ import { getAllPostsForHome } from '../lib/api';
 
 export default function Home({
   allPosts,
-}: InferGetServerSidePropsType<typeof getServerSideProps>): ReactElement {
+}: InferGetStaticPropsType<typeof getStaticProps>): ReactElement {
   const posts = allPosts.edges;
 
   return (
@@ -57,12 +57,13 @@ const PostListing = ({ post }) => (
   </Link>
 );
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const allPosts = await getAllPostsForHome();
 
   return {
     props: {
       allPosts,
     },
+    revalidate: 60,
   };
 };
