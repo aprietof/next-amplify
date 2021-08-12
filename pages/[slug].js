@@ -24,15 +24,10 @@ export default function Post({ post }) {
   )
 }
 
-export async function getStaticPaths() {
-  return { paths: [], fallback: 'blocking' };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const { post } = await getPostBySlug(params.slug)
 
   return {
     props: { post },
-    revalidate: 60,
   }
 }
