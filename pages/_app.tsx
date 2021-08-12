@@ -1,7 +1,9 @@
-import '../styles/globals.css';
+/* eslint-disable react/jsx-props-no-spreading */
+import type { AppProps } from 'next/app';
+import { ReactElement } from 'react';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;

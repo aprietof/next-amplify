@@ -1,10 +1,14 @@
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ReactElement } from 'react';
 import styles from '../styles/Home.module.css';
 import { getAllPostsForHome } from '../lib/api';
 
-export default function Home({ allPosts }) {
+export default function Home({
+  allPosts,
+}: InferGetServerSidePropsType<typeof getServerSideProps>): ReactElement {
   const posts = allPosts.edges;
 
   return (
@@ -53,7 +57,7 @@ const PostListing = ({ post }) => (
   </Link>
 );
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const allPosts = await getAllPostsForHome();
 
   return {
@@ -61,4 +65,4 @@ export async function getServerSideProps() {
       allPosts,
     },
   };
-}
+};

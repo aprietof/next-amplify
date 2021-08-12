@@ -1,12 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { getPostBySlug } from '../lib/api';
 import PostBody from '../src/components/post-body';
 import styles from '../styles/Home.module.css';
 
-export default function Post({ post }) {
+export default function Post({
+  post,
+}: InferGetServerSidePropsType<typeof getServerSideProps>): ReactElement {
   return (
     <div
       style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
@@ -38,10 +41,10 @@ export default function Post({ post }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { post } = await getPostBySlug(params.slug);
 
   return {
     props: { post },
   };
-}
+};
